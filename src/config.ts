@@ -23,9 +23,9 @@ const config: config = {
     // SPREADSHEET_ID: process.env.SPREADSHEET_ID,
     // FORM_ID: process.env.FORM_ID,
     // CALENDER_ID: process.env.CALENDER_ID,
-    SPREADSHEET_ID: '14BiD7mgoN4vn7Ou9LNNiPDY-p-_0KEq4EMhQmt3zs10',
-    FORM_ID: '1jtStNVdHjtUuiIitjpPuApc8X7Rt-Qh75Ixq4NztY9M',
-    CALENDER_ID: 'ndrsonpk7dgevgj26l515p98bc@group.calendar.google.com',
+    SPREADSHEET_ID: '1dbL3S-SSmP2h37S8YMy5a-WBtFyHF5E-12VTe4MwATE',
+    FORM_ID: '1YD9ZDSSUszIqQOQhy2e3RPoaO0TOh9JgKY1autAz5-8',
+    CALENDER_ID: 'ns96dgmlu20lvqg6m4mdmqtrkk@group.calendar.google.com',
 };
 
 export default config;

@@ -1,1 +1,5 @@
-{ "scriptId": "1JXJMm-nFWloJz7N5hKuBoTYSrmNFC1jLWiZjU-H_TQSccT1_edel6fyD", "rootDir": "./dist" }
+{
+    "scriptId": "1w02KQDUHEHH4xrczdtbhCOqALlR_4lLig-SpvvDmAczj7QasfGX4OnCC",
+    "rootDir": "./dist",
+    "parentId": ["1dbL3S-SSmP2h37S8YMy5a-WBtFyHF5E-12VTe4MwATE"]
+}

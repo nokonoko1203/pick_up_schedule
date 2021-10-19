@@ -58,9 +58,8 @@ yarn clasp create
 
 ```json
 {
-  // "timeZone": "America/New_York",
-  "timeZone": "Asia/Tokyo",
-  ...
+  "scriptId": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "rootDir": "./dist"  // ←追記
 }
 ```
 
@@ -188,3 +187,6 @@ yarn clasp open
 ```
 
 - run script with GUI
+
+- 開発時の注意点などはこちら
+  - [https://www.notion.so/gas-Google-form-spreadsheet-4e11614aa40f41fcb58671eec4dd6296](https://www.notion.so/gas-Google-form-spreadsheet-4e11614aa40f41fcb58671eec4dd6296)
