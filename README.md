@@ -1,5 +1,10 @@
 # pick_up_schedule
 
-This repository is an application to enter your work shifts and then register the time and person to drop off and pick up my son to google calendar.
+Google フォームからシフトの番号を入力して、カレンダーに予定を登録する個人用プログラム
 
-It's personal use, so not available use to others. 
+## 開発方法
+
+```shell
+yarn
+yarn deploy
+```

@@ -6,6 +6,39 @@ function deleteAllEventButton() {
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/config.ts":
+/*!***********************!*\
+  !*** ./src/config.ts ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// import * as dotenv from 'dotenv';
+// dotenv.config();
+// if (!process.env.SPREADSHEET_ID) {
+//     throw Error('SPREADSHEET_ID not found');
+// }
+// if (!process.env.FORM_ID) {
+//     throw Error('FORM_ID not found');
+// }
+// if (!process.env.CALENDER_ID) {
+//     throw Error('CALENDER_ID not found');
+// }
+const config = {
+  // SPREADSHEET_ID: process.env.SPREADSHEET_ID,
+  // FORM_ID: process.env.FORM_ID,
+  // CALENDER_ID: process.env.CALENDER_ID,
+  SPREADSHEET_ID: '14BiD7mgoN4vn7Ou9LNNiPDY-p-_0KEq4EMhQmt3zs10',
+  FORM_ID: '1jtStNVdHjtUuiIitjpPuApc8X7Rt-Qh75Ixq4NztY9M',
+  CALENDER_ID: 'ndrsonpk7dgevgj26l515p98bc@group.calendar.google.com'
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (config);
+
+/***/ }),
+
 /***/ "./src/main.ts":
 /*!*********************!*\
   !*** ./src/main.ts ***!
@@ -19,15 +52,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ main),
 /* harmony export */   "deleteAllEventButton": () => (/* binding */ deleteAllEventButton)
 /* harmony export */ });
-const spreadsheetId = '14BiD7mgoN4vn7Ou9LNNiPDY-p-_0KEq4EMhQmt3zs10'; // const sheetId = {
-//     pick_up_schedule: 1300853409,
-//     shift_time: 1355096035,
-//     shift_time_master: 1407213461,
-//     person_master: 295067380,
-// };
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./config */ "./src/config.ts");
 
-const formId = '1jtStNVdHjtUuiIitjpPuApc8X7Rt-Qh75Ixq4NztY9M';
-const calendarId = 'ndrsonpk7dgevgj26l515p98bc@group.calendar.google.com'; // 1レコードごとにオブジェクト化
+const spreadsheetId = _config__WEBPACK_IMPORTED_MODULE_0__["default"].SPREADSHEET_ID;
+const formId = _config__WEBPACK_IMPORTED_MODULE_0__["default"].FORM_ID;
+const calendarId = _config__WEBPACK_IMPORTED_MODULE_0__["default"].CALENDER_ID; // 1レコードごとにオブジェクト化
 
 function makeObjectParRecord(columns, row) {
   let result = {};
@@ -223,20 +252,7 @@ function sortKeyOrder(keyOrder, obj) {
 
 function doGet(e) {
   main();
-} // post用関数
-// export function doPost(e: any) {
-//     const postObj: ShiftTimeForPost = JSON.parse(e.postData.getDataAsString());
-//     const dateObject = new Date(postObj['date']);
-//     postObj['id'] = findMaxShiftTimeId() + 1;
-//     postObj['day_of_the_week'] = getDayOfTheWeek(dateObject);
-//
-//     const keyOrder = ['id', 'date', 'day_of_the_week', 'shift', 'star'];
-//     const newObj = sortKeyOrder(keyOrder, postObj);
-//
-//     const dataForWriting = objToList(newObj);
-//     writeValues('shift_time', dataForWriting);
-// }
-// Google Formのスクリプト
+} // Google Formのスクリプト
 
 function getFormItems() {
   const form = FormApp.openById(formId);
@@ -455,7 +471,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./main */ "./src/main.ts");
  // GASではトップレベル関数しか実行できないのでglobalに登録する・globalに登録しておけばgas-webpack-pluginがトップレベルに配置する
 
-__webpack_require__.g.main = _main__WEBPACK_IMPORTED_MODULE_0__.default;
+__webpack_require__.g.main = _main__WEBPACK_IMPORTED_MODULE_0__["default"];
 __webpack_require__.g.deleteAllEventButton = _main__WEBPACK_IMPORTED_MODULE_0__.deleteAllEventButton;
 })();
 

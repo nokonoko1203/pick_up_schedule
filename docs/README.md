@@ -1,17 +1,31 @@
-# gas_app
+# docs for development
 
-## setup
+参考：[https://www.ykicchan.dev/posts/2020-07-12](https://www.ykicchan.dev/posts/2020-07-12)
+
+## 開発の流れ
+
+- `clasp`（GASのCLIツール・慣れたIDE上でGASが書けるようになった・Googleが作成）や`@types/google-apps-script`（GAS用の型定義）などのGASでTSを利用するためのパッケージなどを導入
+- claspでプロジェクトをGASに作成
+- tsでロジックを書く
+- GASではトップレベル関数しか実行できないのでindex.tsを用意しロジックをインポートしてglobalに登録する
+    - globalに登録しておけばgas-webpack-pluginがトップレベルに配置する
+- babelでtsをトランスパイル
+- webpackでjsを1つにまとめる
+- claspでビルド
+- なぜかdotenv周り（というかGASとwebpackとdotenvの相性？）でハマることがあるので注意
+
+## **setup**
 
 - setup git
 
-```shell
+```bash
 git init
 gibo dump Node > .gitignore
 ```
 
 - comment out `dist` in .gitignore
 
-```.gitignore
+```
 ...
 # Nuxt.js build / generate output
 .nuxt
@@ -21,7 +35,7 @@ gibo dump Node > .gitignore
 
 - create gas project
 
-```shell
+```bash
 yarn init -y
 mkdir src dist
 touch src/index.ts
@@ -34,30 +48,31 @@ yarn add -D @google/clasp
 
 - create project
 
-```shell
+```bash
 yarn clasp login
 yarn clasp create
 ? Create which script? sheets
 ```
 
-- edit `.clasp.json`
+- edit `.clasp.json`
 
 ```json
 {
-  "scriptId": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-  "rootDir": "./dist"
+  // "timeZone": "America/New_York",
+  "timeZone": "Asia/Tokyo",
+  ...
 }
 ```
 
-- move `appsscript.json`
+- move `appsscript.json`
 
-```shell
+```bash
 mv appsscript.json dist
 ```
 
-- edit `appsscript.json`
+- edit `appsscript.json`
 
-```
+```json
 {
   // "timeZone": "America/New_York",
   "timeZone": "Asia/Tokyo",
@@ -67,7 +82,7 @@ mv appsscript.json dist
 
 - install development package
 
-```shell
+```bash
 yarn add -D typescript @types/google-apps-script
 yarn add -D webpack webpack-cli
 yarn add -D @babel/core @babel/preset-typescript babel-loader
@@ -76,7 +91,7 @@ yarn add -D gas-webpack-plugin
 
 - make tsconfig.json
 
-```shell
+```bash
 cat << EOF > ./tsconfig.json
 {
   "compilerOptions": {
@@ -101,7 +116,7 @@ EOF
 
 - make .babelrc
 
-```shell
+```bash
 cat << EOF > .babelrc
 {
   "presets": [
@@ -113,13 +128,14 @@ EOF
 
 - make webpack.config.js
 
-```shell
+```bash
 cat << EOF > webpack.config.js
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
 const GasPlugin = require("gas-webpack-plugin");
 
 module.exports = {
+  target: 'node',
   mode: "development",
   devtool: false,
   context: __dirname,
@@ -159,15 +175,15 @@ EOF
 }
 ```
 
--  deploy
+- deploy
 
-```shell
+```bash
 yarn deploy
 ```
 
 - view project
 
-```shell
+```bash
 yarn clasp open
 ```
 
