@@ -358,4 +358,5 @@ export default function main() {
 export function deleteAllEventButton() {
     deleteAllEvent();
     clearSheet('shift_time');
+    clearSheet('pick_up_schedule');
 }

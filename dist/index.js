@@ -394,6 +394,7 @@ function main() {
 function deleteAllEventButton() {
   deleteAllEvent();
   clearSheet('shift_time');
+  clearSheet('pick_up_schedule');
 }
 
 /***/ })
