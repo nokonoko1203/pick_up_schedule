@@ -127,7 +127,6 @@ function findPerson(id) {
 function isOverBoundary(start, boundary) {
   return start.getTime() > boundary.getTime();
 } // 送り迎え予定を算出
-// todo:星つきの場合は帰りが15分早くなるので、その処理を追加
 
 
 function calcSchedule(shiftTimeMasterId) {
@@ -271,11 +270,15 @@ function getFormItems() {
   }
 }
 
+function isStar(star) {
+  return star === 'はい';
+}
+
 function makeDataForWriting(item) {
   return {
     date: item[0],
     shift: Number(item[1]),
-    star: Boolean(item[2])
+    star: isStar(item[2])
   };
 }
 
@@ -324,7 +327,11 @@ function createSchedule() {
     const start = shiftMasterObj['start'];
     const startDateTime = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate(), start.getHours(), start.getMinutes(), start.getSeconds());
     const end = shiftMasterObj['end'];
-    const endDateTime = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate(), end.getHours(), end.getMinutes(), end.getSeconds()); //todo:shiftTime["star"]がtrueならendDateTimeのMinutesを15分引く処理を追加
+    const endDateTime = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate(), end.getHours(), end.getMinutes(), end.getSeconds());
+
+    if (shiftTime['star']) {
+      endDateTime.setMinutes(endDateTime.getMinutes() - 15);
+    }
 
     const keyword = shiftMasterObj['keyword'];
     addEvent({
