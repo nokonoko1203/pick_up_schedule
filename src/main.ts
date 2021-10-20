@@ -191,11 +191,6 @@ function sortKeyOrder(keyOrder: string[], obj: any) {
     return keyOrder.map((key) => obj[key]);
 }
 
-// get用関数
-export function doGet(e: any) {
-    main();
-}
-
 // Google Formのスクリプト
 export function getFormItems() {
     const form = FormApp.openById(formId);
