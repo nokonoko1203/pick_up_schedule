@@ -132,7 +132,8 @@ function isOverBoundary(start, boundary) {
 
 function calcSchedule(shiftTimeMasterId) {
   const startTime = findStartTime(shiftTimeMasterId);
-  const boundaryTime = new Date(startTime);
+  const boundaryTime = new Date(startTime); // お迎えにどっちがいくのか、という境界の時間
+
   boundaryTime.setFullYear(startTime.getFullYear());
   boundaryTime.setMonth(startTime.getMonth());
   boundaryTime.setDate(startTime.getDate());
@@ -279,7 +280,9 @@ function makeDataForWriting(item) {
 }
 
 function writeFormDataToSheet(sheetName, data) {
-  const dateObject = new Date(data['date']);
+  const now = new Date();
+  const year = now.getFullYear();
+  const dateObject = new Date(`${year}-${data['date']}`);
   data['id'] = findMaxShiftTimeId() + 1;
   data['day_of_the_week'] = getDayOfTheWeek(dateObject);
   const keyOrder = ['id', 'date', 'day_of_the_week', 'shift', 'star'];
@@ -321,7 +324,8 @@ function createSchedule() {
     const start = shiftMasterObj['start'];
     const startDateTime = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate(), start.getHours(), start.getMinutes(), start.getSeconds());
     const end = shiftMasterObj['end'];
-    const endDateTime = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate(), end.getHours(), end.getMinutes(), end.getSeconds());
+    const endDateTime = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate(), end.getHours(), end.getMinutes(), end.getSeconds()); //todo:shiftTime["star"]がtrueならendDateTimeのMinutesを15分引く処理を追加
+
     const keyword = shiftMasterObj['keyword'];
     addEvent({
       title: `お見送り：${seeOffName}, お迎え：${pickUpName}`,

@@ -224,7 +224,7 @@ function writeFormDataToSheet(sheetName: string, data: any) {
     const now = new Date();
     const year = now.getFullYear();
 
-    const dateObject = new Date(year + data['date']);
+    const dateObject = new Date(`${year}-${data['date']}`);
     data['id'] = findMaxShiftTimeId() + 1;
     data['day_of_the_week'] = getDayOfTheWeek(dateObject);
 
