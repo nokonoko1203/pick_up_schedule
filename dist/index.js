@@ -48,7 +48,6 @@ const config = {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "doGet": () => (/* binding */ doGet),
 /* harmony export */   "getFormItems": () => (/* binding */ getFormItems),
 /* harmony export */   "default": () => (/* binding */ main),
 /* harmony export */   "deleteAllEventButton": () => (/* binding */ deleteAllEventButton)
@@ -226,21 +225,6 @@ function findMaxShiftTimeId() {
   return Math.max(...ids);
 }
 
-function makeResponseContent(content) {
-  let result = ContentService.createTextOutput();
-  result.setMimeType(ContentService.MimeType.JAVASCRIPT);
-
-  if (typeof content === 'string') {
-    result.setContent(findMaxShiftTimeId().toString());
-    return result;
-  } else if (content !== null && (typeof content === 'object' || typeof content === 'function')) {
-    result.setContent(JSON.stringify(content));
-    return result;
-  } else {
-    throw new Error('contentは文字列とobjectしか受け付けません');
-  }
-}
-
 function getDayOfTheWeek(date) {
   const dayOfTheWeeks = ['日', '月', '火', '水', '木', '金', '土'];
   return dayOfTheWeeks[date.getDay()];
@@ -248,12 +232,8 @@ function getDayOfTheWeek(date) {
 
 function sortKeyOrder(keyOrder, obj) {
   return keyOrder.map(key => obj[key]);
-} // get用関数
-
-
-function doGet(e) {
-  main();
 } // Google Formのスクリプト
+
 
 function getFormItems() {
   const form = FormApp.openById(formId);
@@ -274,10 +254,25 @@ function isStar(star) {
   return star === 'はい';
 }
 
+function keywordToShiftNumber(keyword) {
+  const org = {
+    早1: 1,
+    早2: 2,
+    早3: 3,
+    中1: 4,
+    中2: 5,
+    中3: 6,
+    遅1: 7,
+    遅2: 8,
+    遅3: 9
+  };
+  return org[keyword];
+}
+
 function makeDataForWriting(item) {
   return {
     date: item[0],
-    shift: Number(item[1]),
+    shift: keywordToShiftNumber(item[1]),
     star: isStar(item[2])
   };
 }

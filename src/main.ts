@@ -195,10 +195,25 @@ function isStar(star: string) {
     return star === 'はい';
 }
 
+function keywordToShiftNumber(keyword: string) {
+    const org: { [key: string]: number } = {
+        早1: 1,
+        早2: 2,
+        早3: 3,
+        中1: 4,
+        中2: 5,
+        中3: 6,
+        遅1: 7,
+        遅2: 8,
+        遅3: 9,
+    };
+    return org[keyword];
+}
+
 function makeDataForWriting(item: string[]) {
     return {
         date: item[0],
-        shift: Number(item[1]),
+        shift: keywordToShiftNumber(item[1]),
         star: isStar(item[2]),
     };
 }
