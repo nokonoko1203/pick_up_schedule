@@ -167,21 +167,6 @@ function findMaxShiftTimeId(): number {
     return Math.max(...ids);
 }
 
-function makeResponseContent(content: string | {} | []) {
-    let result = ContentService.createTextOutput();
-    result.setMimeType(ContentService.MimeType.JAVASCRIPT);
-
-    if (typeof content === 'string') {
-        result.setContent(findMaxShiftTimeId().toString());
-        return result;
-    } else if (content !== null && (typeof content === 'object' || typeof content === 'function')) {
-        result.setContent(JSON.stringify(content));
-        return result;
-    } else {
-        throw new Error('contentは文字列とobjectしか受け付けません');
-    }
-}
-
 function getDayOfTheWeek(date: Date): string {
     const dayOfTheWeeks = ['日', '月', '火', '水', '木', '金', '土'];
     return dayOfTheWeeks[date.getDay()];
